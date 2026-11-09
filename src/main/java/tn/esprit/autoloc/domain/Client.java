@@ -5,6 +5,7 @@ import lombok.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "client")
@@ -30,5 +31,6 @@ public class Client {
     // Pas de REMOVE : supprimer un client ne doit pas effacer l'historique des reservations.
     @OneToMany(mappedBy = "client", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     @Builder.Default
+    @JsonManagedReference("client-reservations")
     private List<Reservation> reservations = new ArrayList<>();
 }

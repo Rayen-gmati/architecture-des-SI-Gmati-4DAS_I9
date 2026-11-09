@@ -5,6 +5,8 @@ import lombok.*;
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "vehicule")
@@ -32,6 +34,7 @@ public class Vehicule {
     // N Vehicule -> 1 Agence (cote proprietaire : cle etrangere agence_id)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "agence_id")
+    @JsonBackReference("agence-vehicules")
     private Agence agence;
 
     // N Vehicule <-> N Equipement : table de jointure vehicule_equipement
@@ -43,5 +46,6 @@ public class Vehicule {
             inverseJoinColumns = @JoinColumn(name = "equipement_id")
     )
     @Builder.Default
+    @JsonManagedReference("vehicule-equipements")
     private Set<Equipement> equipements = new HashSet<>();
 }

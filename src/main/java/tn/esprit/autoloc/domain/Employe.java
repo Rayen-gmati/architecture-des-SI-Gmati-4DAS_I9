@@ -2,6 +2,7 @@ package tn.esprit.autoloc.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "employe")
@@ -24,5 +25,6 @@ public class Employe {
     // LAZY : par defaut @ManyToOne est EAGER, on le passe en LAZY pour eviter des chargements inutiles.
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "agence_id")
+    @JsonBackReference("agence-employes")
     private Agence agence;
 }

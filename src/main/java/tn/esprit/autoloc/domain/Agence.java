@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import java.util.ArrayList;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "agence")
@@ -26,10 +27,12 @@ public class Agence {
     // Pas de cascade de suppression : supprimer une agence ne supprime pas ses vehicules.
     @OneToMany(mappedBy = "agence", fetch = FetchType.LAZY)
     @Builder.Default
+    @JsonManagedReference("agence-vehicules")
     private List<Vehicule> vehicules = new ArrayList<>();
 
     // 1 Agence -> N Employe
     @OneToMany(mappedBy = "agence", fetch = FetchType.LAZY)
     @Builder.Default
+    @JsonManagedReference("agence-employes")
     private List<Employe> employes = new ArrayList<>();
 }

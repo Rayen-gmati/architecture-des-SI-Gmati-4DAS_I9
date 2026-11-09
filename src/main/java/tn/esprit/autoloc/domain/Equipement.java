@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import java.util.HashSet;
 import java.util.Set;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "equipement")
@@ -22,5 +23,6 @@ public class Equipement {
     // Pas de cascade : supprimer un equipement ne doit pas supprimer les vehicules.
     @ManyToMany(mappedBy = "equipements", fetch = FetchType.LAZY)
     @Builder.Default
+    @JsonBackReference("vehicule-equipements")
     private Set<Vehicule> vehicules = new HashSet<>();
 }
