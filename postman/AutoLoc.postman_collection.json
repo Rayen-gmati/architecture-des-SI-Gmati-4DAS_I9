@@ -1,0 +1,51 @@
+{
+  "info": {
+    "name": "AutoLoc Atelier 4",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {"key": "baseUrl", "value": "http://localhost:8081/autoloc"},
+    {"key": "clientId", "value": "1"},
+    {"key": "agenceTunisId", "value": "1"},
+    {"key": "agenceSfaxId", "value": "2"},
+    {"key": "employeId", "value": "1"},
+    {"key": "vehiculeId", "value": "1"},
+    {"key": "vehiculeNeufId", "value": "2"},
+    {"key": "equipementSiegeBebeId", "value": "1"}
+  ],
+  "item": [
+    {"name":"Clients CRUD","item":[
+      {"name":"Lister","request":{"method":"GET","url":"{{baseUrl}}/clients"}},
+      {"name":"Créer","request":{"method":"POST","header":[{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","raw":"{\"nom\":\"Dupont\"}"},"url":"{{baseUrl}}/clients"}},
+      {"name":"Consulter","request":{"method":"GET","url":"{{baseUrl}}/clients/{{clientId}}"}},
+      {"name":"Modifier","request":{"method":"PUT","header":[{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","raw":"{\"idClient\":1,\"nom\":\"Martin\"}"},"url":"{{baseUrl}}/clients"}},
+      {"name":"Supprimer","request":{"method":"DELETE","url":"{{baseUrl}}/clients/{{clientId}}"}}
+    ]},
+    {"name":"Agences CRUD","item":[
+      {"name":"Lister","request":{"method":"GET","url":"{{baseUrl}}/agences"}},
+      {"name":"Créer","request":{"method":"POST","header":[{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","raw":"{\"nom\":\"Agence Centre\",\"ville\":\"Tunis\"}"},"url":"{{baseUrl}}/agences"}},
+      {"name":"Consulter","request":{"method":"GET","url":"{{baseUrl}}/agences/{{agenceId}}"}},
+      {"name":"Modifier","request":{"method":"PUT","header":[{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","raw":"{\"idAgence\":1,\"nom\":\"Agence Nord\"}"},"url":"{{baseUrl}}/agences"}},
+      {"name":"Supprimer","request":{"method":"DELETE","url":"{{baseUrl}}/agences/{{agenceId}}"}}
+    ]},
+    {"name":"Employés CRUD et affectations","item":[
+      {"name":"Lister","request":{"method":"GET","url":"{{baseUrl}}/employes"}},
+      {"name":"Créer","request":{"method":"POST","header":[{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","raw":"{\"nom\":\"Ali\",\"prenom\":\"Sami\",\"role\":\"AGENT\"}"},"url":"{{baseUrl}}/employes"}},
+      {"name":"Consulter","request":{"method":"GET","url":"{{baseUrl}}/employes/{{employeId}}"}},
+      {"name":"Modifier","request":{"method":"PUT","header":[{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","raw":"{\"idEmploye\":1,\"nom\":\"Ali\"}"},"url":"{{baseUrl}}/employes"}},
+      {"name":"Affecter à Tunis (après désaffectation)","request":{"method":"PUT","url":"{{baseUrl}}/employes/{{employeId}}/agence/{{agenceTunisId}}"}},
+      {"name":"Désaffecter agence","request":{"method":"DELETE","url":"{{baseUrl}}/employes/{{employeId}}/agence"}},
+      {"name":"Supprimer","request":{"method":"DELETE","url":"{{baseUrl}}/employes/{{employeId}}"}}
+    ]},
+    {"name":"Véhicules CRUD et équipements","item":[
+      {"name":"Lister","request":{"method":"GET","url":"{{baseUrl}}/vehicules"}},
+      {"name":"Créer","request":{"method":"POST","header":[{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","raw":"{\"immatriculation\":\"123TU4567\",\"marque\":\"Renault\",\"modele\":\"Clio\"}"},"url":"{{baseUrl}}/vehicules"}},
+      {"name":"Consulter","request":{"method":"GET","url":"{{baseUrl}}/vehicules/{{vehiculeId}}"}},
+      {"name":"Modifier","request":{"method":"PUT","header":[{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","raw":"{\"idVehicule\":1,\"marque\":\"Peugeot\"}"},"url":"{{baseUrl}}/vehicules"}},
+      {"name":"Affecter véhicule neuf à Sfax","request":{"method":"PUT","url":"{{baseUrl}}/vehicules/{{vehiculeNeufId}}/agence/{{agenceSfaxId}}"}},
+      {"name":"Installer le siège bébé","request":{"method":"PUT","url":"{{baseUrl}}/vehicules/{{vehiculeNeufId}}/equipements/{{equipementSiegeBebeId}}"}},
+      {"name":"Retirer le siège bébé","request":{"method":"DELETE","url":"{{baseUrl}}/vehicules/{{vehiculeNeufId}}/equipements/{{equipementSiegeBebeId}}"}},
+      {"name":"Supprimer","request":{"method":"DELETE","url":"{{baseUrl}}/vehicules/{{vehiculeId}}"}}
+    ]}
+  ]
+}
